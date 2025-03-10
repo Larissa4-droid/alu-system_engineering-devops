@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 # Update and install Nginx
 sudo apt update -y
 sudo apt install -y nginx
@@ -24,4 +23,3 @@ EOF'
 
 # Restart Nginx to apply changes
 sudo systemctl restart nginx
-
