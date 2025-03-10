@@ -4,7 +4,21 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo ufw allow "Nginx HTTP"
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html
-newlines="\\\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}"
-sudo sed -i "27i $newlines" /etc/nginx/sites-available/default
-sudo service nginx restart
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
+server {
+    listen 80;
+    server_name _;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    error_page 404 /404.html;
+
+    location = /404.html {
+        root /var/www/html;
+        internal;
+    }
+}
+EOF'
+sudo systemctl restart nginx
