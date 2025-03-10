@@ -4,6 +4,7 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo ufw allow "Nginx HTTP"
+echo "Ceci n'est pas une page"
 echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/404.html /var/www/html/404.html 
 sudo chmod 644 /usr/share/nginx/html/404.html /var/www/html/404.html
 sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
